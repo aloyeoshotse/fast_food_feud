@@ -4,6 +4,7 @@ import { createDataSet } from "./data/dataset"
 import "./App.css"
 import Header from "./components/Header/Header" //imported header component
 import Instructions from "./components/Instructions/Instructions" //imported instructions component
+import Chip from "./components/Chip/Chip"
 
 
 // don't move this!
@@ -23,6 +24,7 @@ export const appInfo = {
 // or this!
 const { data, categories, restaurants } = createDataSet()
 
+console.log(categories);
 export function App() {
   return (
     <main className="App">
@@ -30,7 +32,12 @@ export function App() {
       <div className="CategoriesColumn col">
         <div className="categories options">
           <h2 className="title">Categories</h2>
-          {/* YOUR CODE HERE */}
+          {categories.map((item,idx) => {
+            return (
+              <Chip key={idx} label={item}/>
+            )
+          }
+          )}
         </div>
       </div>
 
@@ -41,7 +48,15 @@ export function App() {
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
           <h2 className="title">Restaurants</h2>
-          <div className="restaurants options">{/* YOUR CODE HERE */}</div>
+          <div className="restaurants options">
+            {restaurants.map(item => {
+              return(
+              <p key={item}>{item}</p>
+              )
+            })
+            
+          }
+          </div>
         </div>
 
         {<Instructions instructions={appInfo.instructions}/>}
