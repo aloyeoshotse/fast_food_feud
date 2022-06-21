@@ -32,9 +32,8 @@ export function App() {
   var currentMenuItems = data.filter((item) => {
       if (selected_category != "") {return((item.food_category == selected_category && item.restaurant == selected_restaurant))}
     })
-  console.log("current=",currentMenuItems)
-  console.log("selected",selected_item)
-  //console.log(categories);
+  console.log("selected =",selected_item)
+  console.log("big_cat=",categories);
   return (
     <main className="App">
       {/* CATEGORIES COLUMN */}
@@ -42,6 +41,7 @@ export function App() {
         <div className="categories options">
           <h2 className="title">Categories</h2>
           {categories.map((item,idx) => {
+            console.log("cat=",item)
             return (
             <Chip key={idx} label={item} onClick={()=>{setSelectedCategory(item)}} isActive={item === selected_category}/>
             )
@@ -52,7 +52,7 @@ export function App() {
 
       {/* MAIN COLUMN */}
       <div className="container">
-        {<Header info={appInfo}/>}
+        {<Header props={appInfo}/>}
 
         {/* RESTAURANTS ROW */}
         <div className="RestaurantsRow">
@@ -68,7 +68,7 @@ export function App() {
           </div>
         </div>
 
-        {<Instructions instructions={appInfo.instructions}/>}
+        {<Instructions instructions={appInfo.instructions} cat={selected_category} rest={selected_restaurant} item={selected_item}/>}
 
         {/* MENU DISPLAY */}
         <div className="MenuDisplay display">
@@ -76,13 +76,14 @@ export function App() {
             <h2 className="title">Menu Items</h2>
             {currentMenuItems.map((item,idx) => {
               return(
-                <Chip key={idx} label={item.item_name} onClick={() => {setSelectedItem(item)}} isActive={item===selected_item}/>
-              )
-            })}
+                <Chip key={idx} label={item.item_name} 
+                onClick={() => {setSelectedItem(item)}} 
+                click= {()=>{setSelectedItem("")}}
+                isActive={item===selected_item}/>)})}
           </div>
 
           {/* NUTRITION FACTS */}
-          <div className="NutritionFacts nutrition-facts">{<NutritionalLabel info={selected_item}/>}</div>
+          <div className="NutritionFacts nutrition-facts">{<NutritionalLabel item={selected_item}/>}</div>
         </div>
 
         <div className="data-sources">

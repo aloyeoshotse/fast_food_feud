@@ -2,16 +2,28 @@ import * as React from "react"
 import "./Instructions.css"
 
 export function Instructions(props) {
+  var instruct;
+  if (props.cat == "" && props.rest == "" && props.item == ""){
+    instruct = props.instructions.start
+  }
+  else if (props.cat != "" && props.rest == "" && props.item == ""){
+    instruct = props.instructions.onlyCategory
+  } 
+  else if (props.cat == "" && props.rest != "" && props.item == "") {
+    instruct = props.instructions.onlyRestaurant
+  }
+  else if (props.cat != "" && props.rest != "" && props.item == "") {
+    instruct = props.instructions.noSelectedItem
+  }
+  else {
+    instruct = props.instructions.allSelected
+  }
+
   return (
     <aside className="instructions">
-      <p>{props.instructions.start}</p>
+      <p>{instruct}</p>
     </aside>
   )
 }
-/*<p>{props.instructions.onlyCategory}</p>
-<p>{props.instructions.onlyRestaurant}</p>
-<p>{props.instructions.noSelectedItem}</p>
-<p>{props.instructions.allSelected}</p>
-*/
 
 export default Instructions
