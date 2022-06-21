@@ -7,14 +7,19 @@ export function NutritionalLabel(props) {
     <div className="nutritional-label">
       <h3 className="title">Nutrition Facts</h3>
 
-      <h4 className="item-name">{`CHANGE_ME`}</h4>
+      <h4 className="item-name">{props.info.item_name}</h4>
 
-      <ul className="fact-list">{/* WRITE CODE HERE */}</ul>
+      <ul className="fact-list">{nutritionFacts.map((item,idx) => {
+        return (
+        <NutritionalLabelFact key={idx} fact={item}/>
+        )
+      }
+      )}</ul>
     </div>
   )
 }
 
-export function NutritionalLabelFact(props) {
+export function NutritionalLabelFact({item,fact}) {
   return (
     <li className="nutrition-fact">
       <span className="fact-label">{/* WRITE CODE HERE */}</span>{" "}
@@ -24,3 +29,12 @@ export function NutritionalLabelFact(props) {
 }
 
 export default NutritionalLabel
+
+/*{props.info.item_name} */
+
+/*{nutritionFacts.map((item,idx) => {
+        return (
+        <NutritionalLabelFact key={idx} fact={item}/>
+        )
+      }
+      )}*/
